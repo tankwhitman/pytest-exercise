@@ -53,7 +53,10 @@ def sq(number):
     assert sq(number) == math.sqrt(number)
     
 ##7
-#def test_greetUser():
+@pytest.mark.parametrize("first, middle, last", ["John", "Paul", "Doe"], ["Alex", "Jane", "Cox"], ["Casey", "Jones"], ["X AE A-12"])
+def test_greetUser(first, middle, last):
+    assert greetUser(isinstance(first, middle, last, str))
+
 
 ##8
 #def test_displayItem():
