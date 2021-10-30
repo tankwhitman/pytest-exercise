@@ -15,10 +15,9 @@ def test_openFile(capsys, name):
             openFile(name)
             captured_stdout, captured_stderr = capsys.readouterr()
             assert captured_stdout.strip() == "File not found"
-            #print("file not found")
 
 ## 2
-@pytest.mark.parametrize("first, second, equal", [(100, 10, 10), (144, 12, 12), ("lol", "string", "another string")])
+@pytest.mark.parametrize("first, second, equal", [(100, 10, 10), (9.5, 4.0, 2.375), ("lol", "string", "another string")])
 def test_numbers(first, second, equal):
     with pytest.raises(TypeError):
         assert numbers(first, second) == equal
