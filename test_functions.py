@@ -22,10 +22,19 @@ def test_numbers(Num1, Num2, equal):
     with pytest.raises(TypeError):
         assert numbers(Num1, Num2) == equal
 
+## 3
+#def test_dist
+
+
 ## 4
 @pytest.mark.parametrize("word, answer", [("racecar", True), ("543212345", True), ("randomword", False), (12, False)])
 def test_isPalindrome(word, answer):
-    assert isPalindrome(word) == answer
+    try:
+        assert isPalindrome(word) == answer
+    except:
+        with pytest.raises(TypeError):
+            assert isPalindrome(word) == answer
+    
 
 
 ## these arent exactly working...
@@ -41,11 +50,13 @@ GEN = geninputs()
 
 
 ##5
-def test_divide(monkeypatch):
+def test_divide(capsys, monkeypatch,):
     monkeypatch.setattr('builtins.input', lambda _: next(GEN))
     #divider.setattr('builtins.input', lambda _: next(GEN))
-
-    assert divide() == 7
+    divide()
+    captured_stdout, captured_stderr = capsys.readouterr()
+    
+    assert captured_stdout.strip() == "Your numbers divided is: 7.0"
 
 ##6
 @pytest.mark.parametrize("number", [64, 81, 100, "banana"])
