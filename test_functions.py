@@ -28,8 +28,8 @@ def test_isPalindrome(word, answer):
 
 ## these arent exactly working...
 @pytest.mark.parametrize("first, second, equal", [(64, 8, 8), (81, 9, 9)])
-def geninputs(first=[64,81], second=[8,9]):
-    inputs = [first, second]
+def geninputs():
+    inputs = ["70", "10"]
 
     for item in inputs:
         yield item
@@ -39,8 +39,19 @@ GEN = geninputs()
 
 
 ##5
-def test_divide(monkeypatch, equal=[8,9]):
-    monkeypatch.setattr(('builtins.input', lambda _: next(GEN)))
-    ##divider.setattr('builtins.input', lambda _: next(GEN))
+def test_divide(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: next(GEN))
+    #divider.setattr('builtins.input', lambda _: next(GEN))
 
-    assert divide() == equal
+    assert divide() == 7
+
+##6
+@pytest.mark.parametrize("number", [64, 81, 100, "banana"])
+def sq(number):
+    assert sq(number) == math.sqrt(number)
+    
+##7
+#def test_greetUser():
+
+##8
+#def test_displayItem():
