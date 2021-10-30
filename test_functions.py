@@ -13,12 +13,14 @@ def test_openFile(capsys):
 ## 2
 @pytest.mark.parametrize("first, second, equal", [(100, 10, 10), (144, 12, 12), ("lol", "string", "another string")])
 def test_numbers(first, second, equal):
-    assert numbers(first, second) == equal
+    with pytest.raises(TypeError):
+        assert numbers(first, second) == equal
 
 
 @pytest.mark.parametrize("Num1, Num2, equal", [("num1", "num2",10)])
 def test_numbers(Num1, Num2, equal):
-    assert numbers(Num1, Num2) == equal
+    with pytest.raises(TypeError):
+        assert numbers(Num1, Num2) == equal
 
 ## 4
 @pytest.mark.parametrize("word, answer", [("racecar", True), ("543212345", True), ("randomword", False), (12, False)])
