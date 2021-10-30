@@ -22,10 +22,19 @@ def test_numbers(Num1, Num2, equal):
     with pytest.raises(TypeError):
         assert numbers(Num1, Num2) == equal
 
+## 3
+#def test_dist
+
+
 ## 4
 @pytest.mark.parametrize("word, answer", [("racecar", True), ("543212345", True), ("randomword", False), (12, False)])
 def test_isPalindrome(word, answer):
-    assert isPalindrome(word) == answer
+    try:
+        assert isPalindrome(word) == answer
+    except:
+        with pytest.raises(TypeError):
+            assert isPalindrome(word) == answer
+    
 
 
 ## these arent exactly working...
