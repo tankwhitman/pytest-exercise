@@ -5,9 +5,11 @@ import math
 ## opens a file in read mode
 ## filename received as a parameter
 def openFile(filename):
-    infile = open(filename, "r")
-
-    print("File opened.")
+    try:
+        infile = open(filename, "r")
+        print("File opened.")
+    except FileNotFoundError:
+        raise FileNotFoundError("File not found")
 
 ## 2
 ## takes two numbers and returns
@@ -75,4 +77,10 @@ def greetUser(first, middle, last):
 ## takes in a Python list
 ## attempts to display the item at the index provided
 def displayItem(numbers, index):
-    print("Your item at", index, "index is", numbers[index])
+    try:
+        index = int(index)
+        print("Your item at", index, "index is", numbers[index])
+    except TypeError:
+        print("wrong value")
+    except ValueError:
+        print("wrong value")

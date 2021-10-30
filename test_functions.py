@@ -3,12 +3,19 @@ from functions import *
 
 
 ## 1
-def test_openFile(capsys):
-    openFile("testing.txt")
-    captured_stdout, captured_stderr = capsys.readouterr()
-    assert captured_stdout.strip() == "File opened."
+@pytest.mark.parametrize("name", ["testing.txt", "data.dat"])
 
-
+def test_openFile(capsys, name):
+    try:
+        openFile(name)
+        captured_stdout, captured_stderr = capsys.readouterr()
+        assert captured_stdout.strip() == "File opened."
+    except:
+        with pytest.raises(FileNotFoundError):
+            openFile(name)
+            captured_stdout, captured_stderr = capsys.readouterr()
+            assert captured_stdout.strip() == "File not found"
+            #print("file not found")
 
 ## 2
 @pytest.mark.parametrize("first, second, equal", [(100, 10, 10), (144, 12, 12), ("lol", "string", "another string")])
@@ -24,7 +31,10 @@ def test_numbers(Num1, Num2, equal):
 
 ## 3
 #def test_dist
-
+## 3
+@pytest.mark.parametrize("x1, y1, x2, y2, answer", [(0, 2, 0, 1, 1),(3,3,6,7,5),(2,-9,-3,3,13)] )
+def test_dist(x1,y1,x2,y2,answer):
+    assert dist(x1,y1,x2,y2) == answer
 
 ## 4
 @pytest.mark.parametrize("word, answer", [("racecar", True), ("543212345", True), ("randomword", False), (12, False)])
@@ -71,3 +81,9 @@ def sq(number):
 
 ##8
 #def test_displayItem():
+@pytest.mark.parametrize("numbers, index, expected", [(["goofy","goober","yeah"],"hello","wrong value"),(["Mr.","Krabs"],0,"Your item at 0 index is Mr."),([0,1,2],2,"Your item at 2 index is 2")])
+def test_displayItem(capsys,numbers,index,expected):
+    displayItem(numbers,index)
+
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == expected
