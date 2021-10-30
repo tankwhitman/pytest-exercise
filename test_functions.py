@@ -4,7 +4,7 @@ from functions import *
 
 
 ## 1
-@pytest.mark.parametrize("name", ["testing.txt", "data.dat"])
+@pytest.mark.parametrize("name", ["testing.txt", "data.dat",  "smelly.txt"])
 
 def test_openFile(capsys, name):
     try:
@@ -47,7 +47,7 @@ def test_isPalindrome(word, answer):
 
 
 ## these arent exactly working...
-@pytest.mark.parametrize("first, second, equal", [(64, 8, 8), (81, 9, 9)])
+#@pytest.mark.parametrize("first, second, equal", [(64, 8, 8), (81, 9, 9)])
 def geninputs():
     inputs = ["70", "10"]
 
@@ -59,7 +59,7 @@ GEN = geninputs()
 
 
 ##5
-def test_divide(capsys, monkeypatch,):
+def test_divide(capsys, monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(GEN))
     try:
         divide()
@@ -71,7 +71,7 @@ def test_divide(capsys, monkeypatch,):
             assert TypeError
 
 ##6
-@pytest.mark.parametrize("number", [64, 81, 100, "banana"])
+@pytest.mark.parametrize("number", [(64), (81), (100), ("banana") ])
 def sq(number):
     try:
         assert sq(number) == math.sqrt(number)
@@ -80,10 +80,12 @@ def sq(number):
             assert False
 ##7
 #def test_greetUser():
-@pytest.mark.parametrize("first, middle, last", ["John", "Paul", "Doe"], ["Alex", "Jane", "Cox"], ["Casey", "Jones"], ["X AE A-12"])
+@pytest.mark.parametrize("first, middle, last", [("John", "Paul", "Doe"), ("Alex", "Jane", "Cox"), ("Casey", "Jones", ""), ("X AE A-12", "", "")])
 def test_greetUser(first, middle, last):
-    assert greetUser(isinstance(first, middle, last, str))
-    
+    string = first + " " + middle + " " + last
+    if(isinstance(string, str)):
+        assert greetUser(first, middle, last) == None
+
 ##8
 #def test_displayItem():
 @pytest.mark.parametrize("numbers, index, expected", [(["goofy","goober","yeah"],"hello","wrong value"),(["Mr.","Krabs"],3,"IndexError"),([0,1,2],2,"Your item at 2 index is 2")])
