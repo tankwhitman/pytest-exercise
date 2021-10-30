@@ -1,3 +1,4 @@
+from typing import TYPE_CHECKING, Type
 import pytest
 from functions import *
 
@@ -30,7 +31,6 @@ def test_numbers(Num1, Num2, equal):
 
 ## 3
 #def test_dist
-## 3
 @pytest.mark.parametrize("x1, y1, x2, y2, answer", [(0, 2, 0, 1, 1),(3,3,6,7,5),(2,-9,-3,3,13)] )
 def test_dist(x1,y1,x2,y2,answer):
     assert dist(x1,y1,x2,y2) == answer
@@ -73,14 +73,20 @@ def test_divide(capsys, monkeypatch,):
 ##6
 @pytest.mark.parametrize("number", [64, 81, 100, "banana"])
 def sq(number):
-    assert sq(number) == math.sqrt(number)
-    
+    try:
+        assert sq(number) == math.sqrt(number)
+    except:
+        with pytest.raises(TypeError):
+            assert False
 ##7
 #def test_greetUser():
-
+@pytest.mark.parametrize("first, middle, last", ["John", "Paul", "Doe"], ["Alex", "Jane", "Cox"], ["Casey", "Jones"], ["X AE A-12"])
+def test_greetUser(first, middle, last):
+    assert greetUser(isinstance(first, middle, last, str))
+    
 ##8
 #def test_displayItem():
-@pytest.mark.parametrize("numbers, index, expected", [(["goofy","goober","yeah"],"hello","wrong value"),(["Mr.","Krabs"],0,"Your item at 0 index is Mr."),([0,1,2],2,"Your item at 2 index is 2")])
+@pytest.mark.parametrize("numbers, index, expected", [(["goofy","goober","yeah"],"hello","wrong value"),(["Mr.","Krabs"],3,"IndexError"),([0,1,2],2,"Your item at 2 index is 2")])
 def test_displayItem(capsys,numbers,index,expected):
     displayItem(numbers,index)
 

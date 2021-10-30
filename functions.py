@@ -23,10 +23,14 @@ def numbers(num1, num2):
 ## takes in two points
 ## finds the distance between the points
 def dist(x1, y1, x2, y2):
-    dist = (x2 - x1) ** 2 + (y2 - y1) ** 2
-    dist = math.sqrt(dist)
+    try:
+        dist = ((x2 - x1)**2) + ((y2 - y1)**2)
 
-    return dist
+        dist = math.sqrt(dist)
+
+        return dist
+    except TypeError:
+        print("Error")
 
 ## 4
 ## takes in a string -- reverses it
@@ -62,7 +66,12 @@ def divide():
 ## 6
 ## returns the squareroot of a particular number
 def sq(num):
-    return math.sqrt(num)
+    try:
+        
+        number = math.sqrt(num)
+        return number
+    except:
+        raise ValueError
 
 ## 7
 ## grabs user's name
@@ -84,3 +93,5 @@ def displayItem(numbers, index):
         print("wrong value")
     except ValueError:
         print("wrong value")
+    except IndexError:
+        print("IndexError")
