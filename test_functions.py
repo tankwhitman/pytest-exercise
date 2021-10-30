@@ -50,11 +50,13 @@ GEN = geninputs()
 
 
 ##5
-def test_divide(monkeypatch):
+def test_divide(capsys, monkeypatch,):
     monkeypatch.setattr('builtins.input', lambda _: next(GEN))
     #divider.setattr('builtins.input', lambda _: next(GEN))
-
-    assert divide() == 7
+    divide()
+    captured_stdout, captured_stderr = capsys.readouterr()
+    
+    assert captured_stdout.strip() == "Your numbers divided is: 7.0"
 
 ##6
 @pytest.mark.parametrize("number", [64, 81, 100, "banana"])
