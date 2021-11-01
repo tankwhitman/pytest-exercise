@@ -8,17 +8,18 @@ def openFile(filename):
     try:
         infile = open(filename, "r")
         print("File opened.")
-    except FileNotFoundError:
-        raise FileNotFoundError("File not found")
+    except:
+        print("File not found")
 
 ## 2
 ## takes two numbers and returns
 ## the result of a division
 def numbers(num1, num2):
     try:
-        number = num1 / num2
+        return num1 / num2
+
     except TypeError:
-        raise TypeError("You entered the wrong type")
+        return None
 ## 3
 ## takes in two points
 ## finds the distance between the points
@@ -71,16 +72,24 @@ def sq(num):
         number = math.sqrt(num)
         return number
     except:
-        raise ValueError
-
+        return None
 ## 7
 ## grabs user's name
 ## greets them by their entire name
 ## names should be strings
 def greetUser(first, middle, last):
+    array = [first, middle, last]
+    truther = [True, True, True]
+    for i in range(0, 3):
+        if(array[i] == ""):
+            truther[i] = False
+        else:
+            if(array[i].isalpha() == False):
+                raise TypeError("Name must be all letters")
     print("Hello!")
     print("Welcome to the program", first, middle, last)
     print("Glad to have you!")
+
 
 ## 8
 ## takes in a Python list
